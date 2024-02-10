@@ -1,0 +1,175 @@
+<!-- reserve_seat.html -->
+
+{% extends "bootstrap/base.html" %}
+
+{% block title %}Reserve Your Seat{% endblock %}
+
+{% block styles %}
+    {{ super() }}
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
+    <style>
+        /* Your additional styles here */
+        body {
+            background-image: url('{{ url_for("static", filename="images/reserve.jpg") }}');
+            background-size: cover;
+            background-position: center;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .container {
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 10px;
+            padding: 20px;
+            width: 400px;
+            max-width: 90%;
+            text-align: center;
+        }
+
+        .seat-map {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr); /* Adjust the number of columns as needed */
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .seat {
+            display: inline-block;
+            width: 50px;
+            height: 50px;
+            background-color: #f5f5f5;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            text-align: center;
+            line-height: 50px;
+            cursor: pointer;
+        }
+
+        .seat.selected {
+            background-color: #3498db;
+            color: #fff;
+        }
+
+        .btn-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 20px;
+        }
+
+        .btn-reserve {
+            flex: 0 0 auto; /* Prevent shrinking */
+            margin-right: 5px; /* Adjust margin as needed */
+        }
+
+        .btn-download {
+            flex: 1;
+            margin-left: 5px; /* Adjust margin as needed */
+        }
+
+        .error-message {
+            color: red;
+            margin-top: 5px;
+        }
+    </style>
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1>Select Your Seat</h1>
+
+    <!-- Seat Map -->
+    <div class="seat-map">
+        {% for seat_number in range(1, total_seats + 1) %}
+            <div class="seat" data-seat-number="{{ seat_number }}">{{ seat_number }}</div>
+        {% endfor %}
+    </div>
+
+    <!-- Reservation Form -->
+    <form id="reservation-form">
+        <div class="form-group">
+            <label for="name">Your Name:</label>
+            <input type="text" class="form-control" id="name" placeholder="Enter your name" required>
+        </div>
+        <div class="form-group">
+            <label for="selectedSeat">Selected Seat:</label>
+            <input type="text" class="form-control" id="selectedSeat" readonly>
+        </div>
+        <div class="error-message" id="error-message" style="display: none;"></div> <!-- Error message placeholder -->
+        <div class="btn-container">
+            <button type="submit" class="btn btn-primary btn-reserve">Reserve Seat</button>
+
+            <!-- Ticket download button -->
+            <a id="downloadTicket" class="btn btn-success btn-download" style="display: none;" download>Download Ticket</a>
+        </div>
+    </form>
+</div>
+{% endblock %}
+
+{% block scripts %}
+    {{ super() }}
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const seats = document.querySelectorAll(".seat");
+
+            seats.forEach(seat => {
+                seat.addEventListener("click", function() {
+                    if (!seat.classList.contains("selected")) {
+                        seats.forEach(s => s.classList.remove("selected"));
+                        seat.classList.add("selected");
+                        document.getElementById("selectedSeat").value = seat.getAttribute("data-seat-number");
+                    } else {
+                        seat.classList.remove("selected");
+                        document.getElementById("selectedSeat").value = "";
+                    }
+                });
+            });
+
+            document.getElementById("reservation-form").addEventListener("submit", function(event) {
+                event.preventDefault();
+                const name = document.getElementById("name").value;
+                const selectedSeat = document.getElementById("selectedSeat").value;
+                const errorMessage = document.getElementById("error-message");
+
+                if (name.trim() === "") {
+                    errorMessage.innerText = "Please enter your name.";
+                    errorMessage.style.display = "block";
+                } else if (selectedSeat.trim() === "") {
+                    errorMessage.innerText = "Please select a seat.";
+                    errorMessage.style.display = "block";
+                } else {
+                    errorMessage.style.display = "none";
+
+                    // Here you can submit the reservation data to the server
+                    alert(`Reservation successful!\nName: ${name}\nSeat Number: ${selectedSeat}`);
+                    // Show download button
+                    document.getElementById("downloadTicket").style.display = "inline-block";
+                    // Reset form after successful submission
+                    document.getElementById("reservation-form").reset();
+                    seats.forEach(seat => seat.classList.remove("selected"));
+                    document.getElementById("selectedSeat").value = "";
+
+                    // Set up ticket data for download
+                    const timestamp = new Date().toLocaleString();
+                    const ticketData = `Name: ${name}\nSeat Number: ${selectedSeat}\nTime Stamp: ${timestamp}`;
+
+                    // Create Blob with text data
+                    const ticketBlob = new Blob([ticketData], { type: "text/plain" });
+
+                    // Create URL for Blob and set it as the download link href
+                    const ticketURL = URL.createObjectURL(ticketBlob);
+                    document.getElementById("downloadTicket").href = ticketURL;
+
+                    // Set filename for download
+                    document.getElementById("downloadTicket").setAttribute("download", "ticket.txt");
+                }
+            });
+        });
+    </script>
+{% endblock %}
+
