@@ -1,5 +1,6 @@
-/* styles.css */
+/* style.css */
 
+/* Additional Styles */
 .background-container {
     position: relative;
     width: 100%;
@@ -30,11 +31,6 @@
 h1.display-4 {
     font-size: 3em; /* Increase font size for the heading */
     margin-bottom: 20px; /* Add margin at the bottom for separation */
-}
-
-p.lead {
-    font-size: 1.5em; /* Increase font size for the lead paragraph */
-    margin-bottom: 40px; /* Add more margin at the bottom for separation */
 }
 
 .button-container {
