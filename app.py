@@ -37,17 +37,17 @@ def download_ticket(seat_number):
     if reservation:
         name = reservation['name']
         time_stamp = reservation['time']
-        
         ticket_data = f"Name: {name}, Seat Number: {seat_number}, Time: {time_stamp}\n"
-        
         filename = f'ticket_{seat_number}.txt'
-
         with open(filename, 'w') as file:
             file.write(ticket_data)
-
         return send_file(filename, as_attachment=True)
     else:
         return jsonify({'success': False, 'error': 'Seat is not reserved.'}), 400
+
+@app.route('/about-us')  # New route for about us
+def about_us():
+    return render_template('about_us.html')
 
 if __name__ == '__main__':
     app.run(debug=True)
