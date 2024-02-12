@@ -31,6 +31,17 @@ def reserve_seat():
             return jsonify({'success': False, 'error': 'Invalid seat number.'}), 400
     return render_template('reserve_seat.html', total_seats=total_seats)
 
+@app.route('/cancel-reservation/<seat_number>', methods=['POST'])
+def cancel_reservation(seat_number):
+    if seat_number.isdigit() and 1 <= int(seat_number) <= total_seats:
+        if seats[str(seat_number)]:
+            seats[str(seat_number)] = None
+            return jsonify({'success': True, 'message': f'Reservation for seat {seat_number} has been canceled.'}), 200
+        else:
+            return jsonify({'success': False, 'error': 'No reservation found for this seat.'}), 400
+    else:
+        return jsonify({'success': False, 'error': 'Invalid seat number.'}), 400
+
 @app.route('/download-ticket/<seat_number>')
 def download_ticket(seat_number):
     reservation = seats.get(seat_number)

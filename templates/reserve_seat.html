@@ -145,28 +145,38 @@
                 } else {
                     errorMessage.style.display = "none";
 
-                    // Here you can submit the reservation data to the server
-                    alert(`Reservation successful!\nName: ${name}\nSeat Number: ${selectedSeat}`);
-                    // Show download button
-                    document.getElementById("downloadTicket").style.display = "inline-block";
-                    // Reset form after successful submission
-                    document.getElementById("reservation-form").reset();
-                    seats.forEach(seat => seat.classList.remove("selected"));
-                    document.getElementById("selectedSeat").value = "";
+                    fetch('/reserve-seat', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/x-www-form-urlencoded'
+                        },
+                        body: new URLSearchParams({
+                            name: name,
+                            seatNumber: selectedSeat
+                        })
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.success) {
+                            alert(data.message);
+                            document.getElementById("downloadTicket").style.display = "inline-block";
+                            document.getElementById("reservation-form").reset();
+                            seats.forEach(seat => seat.classList.remove("selected"));
+                            document.getElementById("selectedSeat").value = "";
 
-                    // Set up ticket data for download
-                    const timestamp = new Date().toLocaleString();
-                    const ticketData = `Name: ${name}\nSeat Number: ${selectedSeat}\nTime Stamp: ${timestamp}`;
-
-                    // Create Blob with text data
-                    const ticketBlob = new Blob([ticketData], { type: "text/plain" });
-
-                    // Create URL for Blob and set it as the download link href
-                    const ticketURL = URL.createObjectURL(ticketBlob);
-                    document.getElementById("downloadTicket").href = ticketURL;
-
-                    // Set filename for download
-                    document.getElementById("downloadTicket").setAttribute("download", "ticket.txt");
+                            const timestamp = new Date().toLocaleString();
+                            const ticketData = `Name: ${name}\nSeat Number: ${selectedSeat}\nTime Stamp: ${timestamp}`;
+                            const ticketBlob = new Blob([ticketData], { type: "text/plain" });
+                            const ticketURL = URL.createObjectURL(ticketBlob);
+                            document.getElementById("downloadTicket").href = ticketURL;
+                            document.getElementById("downloadTicket").setAttribute("download", "ticket.txt");
+                        } else {
+                            alert(data.error);
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                    });
                 }
             });
         });
