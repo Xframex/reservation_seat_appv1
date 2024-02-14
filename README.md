@@ -13,6 +13,7 @@ Create a virtual environment
 active virtualenv venv  – **venv\Scripts\activate (Windows) 
 source venv/bin/activate (Linux/Mac**)
 >> pip install flask
+>> pip install Flask-Bootstrap
 >> pip install -r requirements.txt
 >> run python app.py
 
