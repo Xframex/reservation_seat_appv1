@@ -7,8 +7,9 @@ Flask Framework: The application is built using Flask web framework, making it l
 Bootstrap Integration: Bootstrap is integrated into the application for a responsive and user-friendly interface.
 Python Backend: The backend logic is implemented in Python, providing flexibility and ease of development
 
-Create a virtual environment virtualenv venv and activate it – **venv\Scripts\activate (Windows) venv/bin/activate (Linux/Mac**)
+Create a virtual environment virtualenv venv and activate it – **venv\Scripts\activate (Windows) 
+source venv/bin/activate (Linux/Mac**)
 Install required libraries >> pip install flask
 install >> pip install -r requirements.txt
-run python app.py
+>> run python app.py
 
