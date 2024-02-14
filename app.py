@@ -48,7 +48,7 @@ def download_ticket(seat_number):
     if reservation:
         name = reservation['name']
         time_stamp = reservation['time']
-        ticket_data = f"Name: {name}, Seat Number: {seat_number}, Time: {time_stamp}\n"
+        ticket_data = f"Name: {name}, Seat Number: {seat_number}, Time: {time_stamp}\n Bon Voyage\n"
         filename = f'ticket_{seat_number}.txt'
         with open(filename, 'w') as file:
             file.write(ticket_data)

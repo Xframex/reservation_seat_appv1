@@ -165,7 +165,7 @@
                             document.getElementById("selectedSeat").value = "";
 
                             const timestamp = new Date().toLocaleString();
-                            const ticketData = `Name: ${name}\nSeat Number: ${selectedSeat}\nTime Stamp: ${timestamp}`;
+                            const ticketData = `Name: ${name}\nSeat Number: ${selectedSeat}\nTime Stamp: ${timestamp}\nBon Voyage!`;
                             const ticketBlob = new Blob([ticketData], { type: "text/plain" });
                             const ticketURL = URL.createObjectURL(ticketBlob);
                             document.getElementById("downloadTicket").href = ticketURL;
