@@ -3,87 +3,109 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>About Us</title>
+    <title>Dynamic Tech Duo</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
     <style>
-        /* Additional Styles */
+        h1 {
+            color: #fff;
+            margin-bottom: 10px;
+            text-align: center;
+        }
         body {
-            margin: 0;
-            font-family: Arial, sans-serif;
-            background-image: url('path/to/background-image.jpg'); /* Add the path to your background image */
+            background-image: url('/static/images/background.jpg');
             background-size: cover;
             background-position: center;
+            font-family: Arial, sans-serif;
+            color: #333;
             background-repeat: no-repeat;
         }
 
         .container {
+            max-width: 800px;
+            margin: 0 auto;
             padding: 20px;
-            background-color: rgba(255, 255, 255, 0.8); /* Add transparency to the background */
-            border-radius: 10px; /* Add some border-radius for a nice look */
-        }
-
-        h2 {
-            color: #333;
-            text-align: center; /* Center align the heading */
-        }
-
-        p {
-            color: #666;
-            font-size: 18px;
         }
 
         .member {
-            text-align: center; /* Center align member information */
-            margin-bottom: 30px;
+            margin-bottom: 40px;
+            text-align: center;
         }
 
-        .member img {
-            width: 100px; /* Set the width of member images */
-            border-radius: 50%; /* Make member images circular */
-            margin-bottom: 10px; /* Add some space between image and text */
+        .member-img {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 20px;
+            transition: transform 0.3s ease;
+        }
+        .member-img:hover {
+            transform: scale(1.1);
+        }
+
+        h3 {
+            color:#fff;
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+
+        p {
+            color: #f5f3f3;
+            font-size: 16px;
+            line-height: 1.5;
         }
 
         .social-icons {
-            margin-top: 10px; /* Add some space above social icons */
+            margin-top: 20px;
         }
 
         .social-icons a {
-            margin: 0 10px; /* Add some space between social icons */
+            display: inline-block;
+            margin-right: 10px;
+        }
+
+        .social-icons img {
+            width: 30px;
+            height: 30px;
+            object-fit: cover;
+            border-radius: 50%;
+            transition: transform 0.3s ease;
+        }
+        .social-icons img:hover {
+            transform: scale(1.1);
         }
     </style>
 </head>
+<h1>Dynamic Tech Dou </h1>
 <body>
+    <div class="container">
+        <div class="member">
+            <img src="/static/images/derrick.png" alt="Member 1" class="img-fluid member-img">
+            <h3>Derrick kimtai</h3>
+            <p>Derrick Kimutai is a full-stack developer with expertise in both frontend and backend technologies. He has extensive experience in building web applications using various frameworks and libraries. Derrick is proficient in languages such as HTML, CSS, JavaScript, Python, and SQL. He has a strong understanding of software development principles and a passion for creating robust and user-friendly applications</p>
+            <div class="social-icons">
+                <a href="https://github.com/derrickkimtai" target="_blank"><img src="/static/images/github.png" alt="github"></a>
+                <a href="https://twitter.com/DerrickMoio" target="_blank"><img src="/static/images/twitter.png" alt="twitter"></a>
+            </div>
+        </div>
 
-<div class="container">
-    <h2>About Us</h2>
-    <p>Our inspiration for this project stemmed from witnessing the challenges people faced when trying to book seats at bus stations. Many endured long queues and wasted precious time just to secure a seat. We recognized the need for a solution that would allow individuals to reserve seats from the comfort of their own homes. This drove us to embark on the journey of developing a reservation system that would alleviate this inconvenience and provide a seamless booking experience for everyone.</p>
-</div>
-
-<div class="container">
-    <div class="member">
-        <img src="path/to/member1-image.jpg" alt="Member 1" class="img-fluid">
-        <h3>Derrick kimtai</h3>
-        <p>>Derrick Kimuatai is a full-stack developer with expertise in both frontend and backend technologies. He has extensive experience in building web applications using various frameworks and libraries. Derrick is proficient in languages such as HTML, CSS, JavaScript, Python, and SQL. He has a strong understanding of software development principles and a passion for creating robust and user-friendly applications</p>
-        <div class="social-icons">
-            <a href="https://github.com/derrickkimtai" target="_blank"><img src="https://www.vecteezy.com/vector-art/17119660-github-logo-git-hub-icon-with-text-on-white-and-black-background" alt="GitHub"></a>
-            <a href="https://twitter.com/DerrickMoio" target="_blank"><img src="https://www.freepik.com/icon/twitter_5969020#fromView=keyword&term=Twitter&page=1&position=0&uuid=a2e59faf-c630-441e-a66f-0407edd33cad" alt="Twitter"></a>
+        <div class="member">
+            <img src="/static/images/ismaiel.png" alt="Member 2" class="img-fluid member-img">
+            <h3>Ismael Loukill</h3>
+            <p>Ismael Loukill is a seasoned full-stack engineer with a wealth of experience in both frontend and backend development. With proficiency in a range of programming languages, frameworks, and tools, Ismael excels in crafting robust and scalable web applications. His comprehensive understanding of software architecture and dedication to staying updated with the latest technologies make him a valuable asset to any development team.</p>
+            <div class="social-icons">
+                <a href="https://github.com/Xframex" target="_blank"><img src="/static/images/github.png" alt="GitHub"></a>
+                <a href="twitter-profile" target="_blank"><img src="/static/images/twitter.png" alt="Twitter"></a>
+            </div>
         </div>
     </div>
 
-    <div class="member">
-        <img src="path/to/member2-image.jpg" alt="Member 2" class="img-fluid">
-        <h3>Member 2 Name</h3>
-        <p>Member 2's Experience: Brief description of experience.</p>
-        <div class="social-icons">
-            <a href="github-profile" target="_blank"><img src="path/to/github-icon.png" alt="GitHub"></a>
-            <a href="twitter-profile" target="_blank"><img src="path/to/twitter-icon.png" alt="Twitter"></a>
-        </div>
-    </div>
-</div>
+    <footer class="text-center" style="margin-top: 50px; color: #fff;">
+        <p>&copy; 2021 Dynamic Tech Duo. All rights reserved.</p>
 
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>
